@@ -7,7 +7,7 @@ include(FetchContent)
 FetchContent_Declare(
         CTaps 
         GIT_REPOSITORY https://github.com/ikhovind/ctaps.git
-        GIT_TAG 5823c4438cbd0d126e82d8c60bf773aa513ff7d5
+        GIT_TAG v0.1.0
 )
 
 FetchContent_MakeAvailable(CTaps)
