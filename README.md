@@ -11,7 +11,7 @@ CTaps requires glib to be installed on your system:
 sudo apt-get update && sudo apt-get install -y libglib2.0-dev
 ```
 
-other dependencies are handled by CTaps itself and fetched automatically.
+other dependencies are handled by CTaps itself and are fetched automatically.
 CTaps can be fetched using FetchContent and linked against like this in
 your cmake project:
 
@@ -21,7 +21,7 @@ include(FetchContent)
 FetchContent_Declare(
         CTaps 
         GIT_REPOSITORY https://github.com/ikhovind/ctaps.git
-        GIT_TAG 5823c4438cbd0d126e82d8c60bf773aa513ff7d5
+        GIT_TAG v0.2.0
 )
 
 FetchContent_MakeAvailable(CTaps)
@@ -29,8 +29,8 @@ FetchContent_MakeAvailable(CTaps)
 add_executable(example_client example_client.c)
 target_link_libraries(example_client PRIVATE CTaps)
 
-add_executable(example_server example_server.c)
-target_link_libraries(example_server PRIVATE CTaps)
+add_executable(example_quic_server example_quic_server.c)
+target_link_libraries(example_quic_server PRIVATE CTaps)
 ```
 
 See the [example-ctaps-downstream-build](.github/workflows/example-ctaps-downstream-build.yml)

@@ -104,7 +104,7 @@ int main() {
 
     // CTaps takes deep copies of the passed
     // objects internally, so the application retains
-    // ownership of the orignals
+    // ownership of the originals 
     ct_local_endpoint_free(local);
     ct_security_parameters_free(security_parameters);
     ct_preconnection_free(preconnection);

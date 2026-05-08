@@ -52,7 +52,7 @@ int main() {
 
     ct_set_log_level(CT_LOG_ERROR);
 
-    const ct_local_endpoint_t* listener_endpoint = ct_local_endpoint_new();
+    ct_local_endpoint_t* listener_endpoint = ct_local_endpoint_new();
     ct_local_endpoint_with_interface(listener_endpoint, "lo");
     ct_local_endpoint_with_port(listener_endpoint, 1234);
 
