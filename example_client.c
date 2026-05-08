@@ -24,7 +24,8 @@ void ping_on_ready(ct_connection_t* connection) {
 
     ct_message_t* message = 0;
     if (num_connections == 1) {
-        printf("Original connection successfully connected to server\n");
+        printf("Original connection successfully connected using: %s\n",
+               ct_connection_get_protocol_name(connection));
         char* msg = "hello from original";
         message = ct_message_new_with_content(msg,
                                               strlen(msg) + 1);
