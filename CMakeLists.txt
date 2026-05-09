@@ -8,7 +8,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 FetchContent_Declare(
         CTaps 
         GIT_REPOSITORY https://github.com/ikhovind/ctaps.git
-        GIT_TAG v0.2.0
+        GIT_TAG v0.3.0
 )
 
 FetchContent_MakeAvailable(CTaps)

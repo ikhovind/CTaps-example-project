@@ -33,10 +33,6 @@ void ping_on_ready(ct_connection_t* connection) {
         // and QUIC, but will utilize multistreaming if
         // QUIC is the underlying protocol and create a new
         // TCP connection if TCP is the underlying protocol.
-        //
-        // This way the application gain advantages from
-        // multistreaming when available, without worrying
-        // about compatibility
         ct_connection_clone(connection);
     }
     else {

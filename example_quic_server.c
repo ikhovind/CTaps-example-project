@@ -58,7 +58,6 @@ int main() {
 
     ct_transport_properties_t* listener_props = ct_transport_properties_new();
     ct_transport_properties_set_reliability(listener_props, REQUIRE);
-    ct_transport_properties_set_preserve_msg_boundaries(listener_props, REQUIRE);
     // CTaps is currently only able to listen to a single protocol per
     // listener and will choose the most preferable protocol, in this
     // case QUIC
