@@ -5,10 +5,10 @@ as a dependency in your projects.
 
 CTaps provides an asynchronous, callback-based interface for network connections, abstracting over TCP, UDP, and QUIC protocols.
 
-CTaps requires glib to be installed on your system:
+CTaps requires some system-level dependencies to be installed on your system:
 
 ```bash
-sudo apt-get update && sudo apt-get install -y libglib2.0-dev
+sudo apt-get install pkg-config libglib2.0-dev libssl-dev
 ```
 
 other dependencies are handled by CTaps itself and are fetched automatically.
