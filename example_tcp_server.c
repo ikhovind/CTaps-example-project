@@ -23,6 +23,7 @@ void respond_and_close_on_message_received(ct_connection_t* connection, ct_messa
 }
 
 void on_connection_received_receive_message(ct_listener_t* listener, ct_connection_t* new_connection) {
+    (void)listener;
     printf("Listener received new connection\n");
     ct_receive_callbacks_t receive_message_request = {
       .receive_callback = respond_and_close_on_message_received,
@@ -48,7 +49,7 @@ void free_on_connection_closed(ct_connection_t* connection) {
     ct_connection_free(connection);
 }
 
-int main() {
+int main(void) {
     // Needed to initialize internal CTaps event loop
     ct_initialize();
 
@@ -57,6 +58,7 @@ int main() {
     ct_local_endpoint_t* listener_endpoint = ct_local_endpoint_new();
     ct_local_endpoint_with_interface(listener_endpoint, "lo");
     ct_local_endpoint_with_port(listener_endpoint, 1234);
+    const ct_local_endpoint_t* locals[] = {listener_endpoint};
 
     ct_transport_properties_t* listener_props = ct_transport_properties_new();
     ct_transport_properties_set_reliability(listener_props, REQUIRE);
@@ -67,7 +69,7 @@ int main() {
 
     // No TLS for plain TCP, pass NULL for security parameters
     ct_preconnection_t* listener_precon = ct_preconnection_new(
-        &listener_endpoint, 1, NULL, 0, listener_props, NULL);
+        locals, 1, NULL, 0, listener_props, NULL);
 
     ct_listener_callbacks_t listener_callbacks = {
         .connection_received = on_connection_received_receive_message,

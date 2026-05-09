@@ -56,7 +56,7 @@ void free_on_connection_closed(ct_connection_t* connection) {
     ct_connection_free(connection);
 }
 
-int main() {
+int main(void) {
     // Needed to initialize internal CTaps event loop
     ct_initialize();
 
@@ -65,10 +65,12 @@ int main() {
     ct_remote_endpoint_t* remote_endpoint = ct_remote_endpoint_new();
     ct_remote_endpoint_with_ipv4(remote_endpoint, inet_addr("127.0.0.1"));
     ct_remote_endpoint_with_port(remote_endpoint, 1234);
+    const ct_remote_endpoint_t* remotes[] = {remote_endpoint};
 
-    ct_local_endpoint_t* local = ct_local_endpoint_new();
+    ct_local_endpoint_t* local_endpoint = ct_local_endpoint_new();
     // Only attempt connections from localhost!
-    ct_local_endpoint_with_interface(local, "lo");
+    ct_local_endpoint_with_interface(local_endpoint, "lo");
+    const ct_local_endpoint_t* locals[] = {local_endpoint};
 
     ct_transport_properties_t* transport_properties = ct_transport_properties_new();
     ct_transport_properties_set_reliability(transport_properties, REQUIRE);
@@ -86,7 +88,7 @@ int main() {
                                                   "resources/key.pem");
 
     ct_preconnection_t* preconnection = ct_preconnection_new(
-        &local, 1, &remote_endpoint, 1, transport_properties, security_parameters);
+        locals, 1, remotes, 1, transport_properties, security_parameters);
 
     ct_connection_callbacks_t connection_callbacks = {
         .ready = ping_on_ready,
@@ -102,7 +104,7 @@ int main() {
     // CTaps takes deep copies of the passed
     // objects internally, so the application retains
     // ownership of the originals 
-    ct_local_endpoint_free(local);
+    ct_local_endpoint_free(local_endpoint);
     ct_security_parameters_free(security_parameters);
     ct_preconnection_free(preconnection);
     ct_transport_properties_free(transport_properties);
